@@ -39,14 +39,15 @@ public class TaskController {
     public String create(@Valid @ModelAttribute("newTask") Task task, Model model) {
         taskService.save(task);
         List<Task> taskList = taskService.findAll();
-        model.addAttribute("tasks", taskList);
-        return "/listTask";
+        model.addAttribute("taskList", taskList);
+        return "listTask";
     }
 
+
     @GetMapping("/list")
-    public String listTask(Model model) {
+    public String listTaskDetail(Model model) {
         List<Task> taskList = taskService.findAll();
-        model.addAttribute("tasks", taskList);
+        model.addAttribute("taskList", taskList);
         return "listTask";
     }
 
@@ -85,7 +86,7 @@ public class TaskController {
         updateTask.setUpdateDate(task.getUpdateDate());
         taskService.save(updateTask);
         List<Task> taskList = taskService.findAll();
-        model.addAttribute("tasks", taskList);
+        model.addAttribute("taskList", taskList);
         return "/listTask";
     }
 
@@ -93,7 +94,7 @@ public class TaskController {
     public String deleteTask(@PathVariable Long id, Model model) {
         taskService.remove(id);
         List<Task> tasks = taskService.findAll();
-        model.addAttribute("tasks", tasks);
+        model.addAttribute("taskList", tasks);
         return "/listTask";
     }
 
